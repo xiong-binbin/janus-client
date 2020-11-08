@@ -1,6 +1,33 @@
 <template>
   <div class="index">
-      Hello
+    <div class="md-layout md-gutter">
+      <div class="md-layout-item">
+        <md-list>
+            <md-list-item target="_blank" href="/camera">camera</md-list-item>
+        </md-list>
+      </div>
+      <div class="md-layout-item">
+        <md-list>
+            <md-list-item target="_blank" href="/test">test</md-list-item>
+        </md-list>
+      </div>      
+      <div class="md-layout-item">
+        <md-list>
+        </md-list>
+      </div>
+      <div class="md-layout-item">
+        <md-list>
+        </md-list>
+      </div>
+      <div class="md-layout-item">
+        <md-list>
+        </md-list>
+      </div>
+      <div class="md-layout-item">
+        <md-list>
+        </md-list>
+      </div>                             
+    </div>
   </div>
 </template>
 
@@ -18,8 +45,27 @@
   }
 </script>
 
-<style scoped>
-.index {
-  padding: 50px 100px 0px 100px;
+<style lang="scss" scoped>
+h1 {
+  font-size: 32px;
+  padding-top: 20px;
+  padding-bottom: 20px;
 }
-</style>
+
+.index {
+  padding: 50px 100px 50px 100px;
+}
+
+.other {
+  margin-top: 160px;
+}
+
+.md-list {
+  background-color: rgba(0, 0, 0, 0);
+}
+
+.md-layout-item {
+  padding-left: 0px !important;
+  padding-right: 0px !important;
+}
+</style> 
