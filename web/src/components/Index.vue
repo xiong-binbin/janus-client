@@ -3,12 +3,12 @@
     <div class="md-layout md-gutter">
       <div class="md-layout-item">
         <md-list>
-            <md-list-item target="_blank" href="/camera">camera</md-list-item>
+            <md-list-item target="_blank" href="/Camera">Camera</md-list-item>
         </md-list>
       </div>
       <div class="md-layout-item">
         <md-list>
-            <md-list-item target="_blank" href="/test">test</md-list-item>
+            <md-list-item target="_blank" href="/Echo">Echo</md-list-item>
         </md-list>
       </div>      
       <div class="md-layout-item">
@@ -33,7 +33,7 @@
 
 <script>
   export default {
-    name: 'index',
+    name: 'Index',
     data () {
       return {
       }

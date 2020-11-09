@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Index from '@/components/Index'
 import Camera from '@/components/Camera'
+import Echo from '@/components/Echo'
 import Test from '@/components/Test'
 
 Vue.use(Router)
@@ -15,12 +16,17 @@ export default new Router({
       component: Index
     },
     {
-      path: '/camera',
+      path: '/Camera',
       name: 'Camera',
       component: Camera
     },
     {
-      path: '/test',
+      path: '/Echo',
+      name: 'Echo',
+      component: Echo
+    },    
+    {
+      path: '/Test',
       name: 'Test',
       component: Test
     },    
