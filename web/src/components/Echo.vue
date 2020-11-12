@@ -42,7 +42,24 @@
               plugin: "janus.plugin.echotest",
               opaqueId: this.opaqueId,
               success: (pluginHandle)=> {
-                console.log('success');
+                this.echotest = pluginHandle;
+                Janus.log("Plugin attached! (" + this.echotest.getPlugin() + ", id=" + this.echotest.getId() + ")");
+                var body = { audio: true, video: true };
+                Janus.debug("Sending message:", body);
+                this.echotest.send({ message: body });
+                Janus.debug("Trying a createOffer too (audio/video sendrecv)");
+                this.echotest.createOffer({
+                  media: { data: true },
+                  simulcast: false,
+                  simulcast2: false,
+                  success: (jsep)=>{
+                    Janus.debug("Got SDP!", jsep);
+                    this.echotest.send({ message: body, jsep: jsep });
+                  },
+                  error: (error)=>{
+                    Janus.error("WebRTC error:", error);
+                  }
+                });
               },
               error: (error)=> {
                 console.log('error');
