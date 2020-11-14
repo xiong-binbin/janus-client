@@ -72,25 +72,25 @@
                 });
               },
               error: (error)=> {
-                console.log('error');
+                console.log("[error]:" + error);
               },
               consentDialog: (on)=> {
-                console.log("consentDialog" + on);
+                console.log("[consentDialog]:" + on);
               },
               iceState: (state)=> {
-                console.log("iceState" + state);
+                console.log("[iceState]:" + state);
               },
               mediaState: (medium, on)=> {
-                console.log('mediaState');
+                console.log("[mediaState]:" + medium + "_" + on);
               },
               webrtcState: (on)=> {
-                console.log('webrtcState');
+                console.log('[webrtcState]' + on);
               },
               slowLink: (uplink, lost)=> {
-                console.log('slowLink');
+                console.log('[slowLink]:' + uplink + "_" + lost);
               },
               onmessage: (msg, jsep)=> {
-                console.log('message' + msg);
+                console.log('[onmessage]:' + msg);
                 if(jsep) {
                   console.log("SDP:" + jsep);
                   this.echotest.handleRemoteJsep({ jsep: jsep });
@@ -100,16 +100,16 @@
                 Janus.attachMediaStream(document.getElementById("localVideo"), stream);
               },
               onremotestream: (stream)=> {
-                console.log('onremotestream');
+                Janus.attachMediaStream(document.getElementById("remoteVideo"), stream);
               },
               ondataopen: (data)=> { 
-                console.log('ondataopen');
+                console.log('[ondataopen]:' + data);
               },
               ondata: (data)=> {
-                console.log('ondata');
+                console.log('[ondata]:' + data);
               },
               oncleanup: ()=> {
-                console.log('oncleanup');
+                console.log('[oncleanup]');
               }
             });
           },
