@@ -1,6 +1,6 @@
 <template>
   <div class="camera">
-    <div class="view">
+    <div>
       <video id="video" width="640" height="480" autoPlay playsInline></video>
     </div>
 
@@ -42,11 +42,11 @@
   text-align: center;
 }
 
-.view {
+video {
   width: 640px;
-  height: 480px;
-  margin: 0 auto;
-  margin-bottom: 20px;
+  height: 480px;  
+  margin-top: 40px;
+  margin-bottom: 40px;
   background-color: #111111;
 }
 </style>

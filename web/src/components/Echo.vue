@@ -1,6 +1,16 @@
 <template>
   <div class="echo">
-    hello
+    <div class="md-layout">
+      <div class="md-layout-item">
+        <video id="localVideo" width="640" height="480" autoPlay playsInline></video>
+        <p>Local Stream</p>
+      </div>
+
+      <div class="md-layout-item">
+        <video id="remoteVideo" width="640" height="480" autoPlay playsInline></video>
+        <p>Remote Stream</p>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -43,21 +53,21 @@
               opaqueId: this.opaqueId,
               success: (pluginHandle)=> {
                 this.echotest = pluginHandle;
-                Janus.log("Plugin attached! (" + this.echotest.getPlugin() + ", id=" + this.echotest.getId() + ")");
+                console.log("Plugin attached! (" + this.echotest.getPlugin() + ", id=" + this.echotest.getId() + ")");
                 var body = { audio: true, video: true };
-                Janus.debug("Sending message:", body);
+                console.log("Sending message:" + body);
                 this.echotest.send({ message: body });
-                Janus.debug("Trying a createOffer too (audio/video sendrecv)");
+                console.log("Trying a createOffer too (audio/video sendrecv)");
                 this.echotest.createOffer({
                   media: { data: true },
                   simulcast: false,
                   simulcast2: false,
                   success: (jsep)=>{
-                    Janus.debug("Got SDP!", jsep);
+                    console.log("Got SDP!"+jsep);
                     this.echotest.send({ message: body, jsep: jsep });
                   },
                   error: (error)=>{
-                    Janus.error("WebRTC error:", error);
+                    console.log("WebRTC error:" + error);
                   }
                 });
               },
@@ -65,10 +75,10 @@
                 console.log('error');
               },
               consentDialog: (on)=> {
-                console.log('consentDialog');
+                console.log("consentDialog" + on);
               },
               iceState: (state)=> {
-                console.log('iceState');
+                console.log("iceState" + state);
               },
               mediaState: (medium, on)=> {
                 console.log('mediaState');
@@ -80,15 +90,19 @@
                 console.log('slowLink');
               },
               onmessage: (msg, jsep)=> {
-                console.log('onmessage');
+                console.log('message' + msg);
+                if(jsep) {
+                  console.log("SDP:" + jsep);
+                  this.echotest.handleRemoteJsep({ jsep: jsep });
+                }
               },
               onlocalstream: (stream)=> {
-                console.log('onlocalstream');
+                Janus.attachMediaStream(document.getElementById("localVideo"), stream);
               },
               onremotestream: (stream)=> {
                 console.log('onremotestream');
               },
-              ondataopen: (data)=> {
+              ondataopen: (data)=> { 
                 console.log('ondataopen');
               },
               ondata: (data)=> {
@@ -100,7 +114,6 @@
             });
           },
           error: (error)=> {
-            Janus.error(error);
             console.log(error);
           },
           destroyed: ()=> {
@@ -113,4 +126,15 @@
 </script>
 
 <style lang="scss" scoped>
+.echo {
+  text-align: center;
+}
+
+video {
+  width: 640px;
+  height: 480px;  
+  margin-top: 40px;
+  margin-bottom: 20px;
+  background-color: #111111;
+}
 </style>
